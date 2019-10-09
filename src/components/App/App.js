@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import Header from './Header'
-import MainSection from './MainSection'
-
+import Header from '../Header/Header'
+import MainSection from '../MainSection/MainSection'
+// import Loginscreen from '../Login/LoginScreen';
+import Login from '../Login/LoginScreen'
 const initialState = [
   {
     text: 'React ES6 TodoMVC',
@@ -89,9 +90,7 @@ class App extends Component {
       )
     }else{
       return(
-        <div>
-          <h1> Log in </h1>
-        </div>
+        <Login/>
       )
     }
     

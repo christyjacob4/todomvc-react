@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types';
-import TodoItem from './TodoItem'
-import Footer from './Footer'
+import TodoItem from '../TodoItem/TodoItem'
+import Footer from '../Footer/Footer'
 
  const TODO_FILTERS = {
    SHOW_ALL: () => true,
