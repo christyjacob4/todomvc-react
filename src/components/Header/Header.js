@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import TodoTextInput from '../TodoTextInput/TodoTextInput'
+import Button from '@material-ui/core/Button';
+import auth from '../../Helpers/auth'
 
-const Header = ({addTodo}) => {
+const Header = ({addTodo, props}) => {
 
   const handleSave = text => {
     if (text.length !== 0) {
@@ -12,7 +14,22 @@ const Header = ({addTodo}) => {
 
   return (
     <header className="header">
-      <h1>todos</h1>
+      <div>
+        <h1>todos</h1>
+        <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={() => {
+              auth.logout();
+              props.history.push('/')
+            }}
+          >
+            Logout
+          </Button>
+      </div>
+      
       <TodoTextInput
         newTodo
         onSave={handleSave}
