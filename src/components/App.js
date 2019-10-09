@@ -21,6 +21,8 @@ class App extends Component {
   }
 
   addTodo = (text) => {
+
+    //  TODO  Add functionality to add to appwrite database
     const todos = [
       {
         id: this.state.todos.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
@@ -33,11 +35,13 @@ class App extends Component {
   }
 
   deleteTodo = (id) => {
+    // TODO remove todo from db 
     const todos = this.state.todos.filter(todo => todo.id !== id)
     this.setState({todos})
   }
 
   editTodo = (id, text) => {
+    // Update todo to DB
     const todos = this.state.todos.map(todo =>
       todo.id === id ? {...todo, text} : todo
     )
@@ -45,6 +49,7 @@ class App extends Component {
   }
 
   completeTodo = (id) => {
+    // Mark todo as completed 
     const todos = this.state.todos.map(todo =>
       todo.id === id ? {...todo, completed: !todo.completed} : todo
     )
@@ -74,12 +79,22 @@ class App extends Component {
   }
 
   render() {
-    return(
-      <div>
-        <Header addTodo={this.actions.addTodo} />
-        <MainSection todos={this.state.todos} actions={this.actions} />
-      </div>
-    )
+
+    if(this.props.isLoggedIn){
+      return(
+        <div>
+          <Header addTodo={this.actions.addTodo} />
+          <MainSection todos={this.state.todos} actions={this.actions} />
+        </div>
+      )
+    }else{
+      return(
+        <div>
+          <h1> Log in </h1>
+        </div>
+      )
+    }
+    
   }
 }
 
