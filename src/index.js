@@ -12,11 +12,11 @@ import 'todomvc-app-css/index.css'
 
 // appwrite
 //     .setEndpoint('http://localhost/v1') // Set only when using self-hosted solution
-//     .setProject('5d9c6301235f2');
+//     .setProject('5d9c6301235f2');    
 
 
 const rootElement = document.getElementById('root')
 
 ReactDOM.render(
-    <BrowserRouter> <App isLoggedIn = {false} /> </BrowserRouter>,  rootElement
+    <BrowserRouter> <App isLoggedIn = {true} /> </BrowserRouter>,  rootElement
 )
