@@ -9,7 +9,7 @@ export default class TodoTextInput extends Component {
     placeholder: PropTypes.string,
     editing: PropTypes.bool,
     newTodo: PropTypes.bool
-  }
+  };
 
   state = {
     text: this.props.text || ''

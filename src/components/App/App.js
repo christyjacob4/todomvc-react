@@ -20,17 +20,16 @@ class App extends Component {
       player: 0,
       isAuth: true
     };
-    console.log("APP PROP", this.props)
+    console.log("APP PROP", this.props);
     console.log(this.state);
   }
 
-//   componentDidMount() {
-//       this.props.auth.checkAuthenticated().then((res) => {
-//           this.setState({isAuth : res})
-//             console.log("Authenticated " , res)
-//           }
-//     )}
-
+  //   componentDidMount() {
+  //       this.props.auth.checkAuthenticated().then((res) => {
+  //           this.setState({isAuth : res})
+  //             console.log("Authenticated " , res)
+  //           }
+  //     )}
 
   addTodo = text => {
     //  TODO  Add functionality to add to appwrite database
@@ -93,11 +92,7 @@ class App extends Component {
     clearCompleted: this.clearCompleted
   };
 
-
   render() {
-    
-    const { isAuth } = this.state
-    if (isAuth === true) {
       console.log("Authenticated");
       return (
         <div>
@@ -105,10 +100,6 @@ class App extends Component {
           <MainSection todos={this.state.todos} actions={this.actions} />
         </div>
       );
-    } else {
-      console.log("Not Authenticated");
-      return <Redirect to="/signin" />;
-    }
   }
 }
 

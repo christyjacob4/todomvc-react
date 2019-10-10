@@ -1,5 +1,9 @@
-class db{
-    constructor(sdk){
-        this.sdk = sdk;
-    }
+class db {
+  constructor(sdk) {
+    this.sdk = sdk;
+  }
+
+  addTodo() {
+
+  }
 }

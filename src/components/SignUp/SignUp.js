@@ -1,32 +1,32 @@
-import React, {useState} from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import React, {useState} from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import {makeStyles} from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
-const useStyles = makeStyles(theme => ({
-  "@global": {
+const useStyles = makeStyles((theme) => ({
+  '@global': {
     body: {
-      backgroundColor: theme.palette.common.white
-    }
+      backgroundColor: theme.palette.common.white,
+    },
   },
-  paper: {
+  'paper': {
     marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding : theme.spacing(8,0,8,0)
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: theme.spacing(8, 0, 8, 0),
   },
-  form: {
-    width: "100%",
-    marginTop: theme.spacing(3)
+  'form': {
+    width: '100%',
+    marginTop: theme.spacing(3),
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
+  'submit': {
+    margin: theme.spacing(3, 0, 2),
+  },
 }));
 
 const SignUp = ({history, auth}) => {
@@ -53,7 +53,7 @@ const SignUp = ({history, auth}) => {
                 label="Name"
                 autoFocus
                 value={name}
-                onChange={event => setName(event.target.value)}
+                onChange={(event) => setName(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -63,7 +63,7 @@ const SignUp = ({history, auth}) => {
                 fullWidth
                 label="Email Address"
                 value={email}
-                onChange={event => setEmail(event.target.value)}
+                onChange={(event) => setEmail(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -74,7 +74,7 @@ const SignUp = ({history, auth}) => {
                 label="Password"
                 type="password"
                 value={password}
-                onChange={event => setPassword(event.target.value)}
+                onChange={(event) => setPassword(event.target.value)}
               />
             </Grid>
           </Grid>
@@ -84,9 +84,9 @@ const SignUp = ({history, auth}) => {
             color="primary"
             className={classes.submit}
             onClick = {()=>{
-              console.log("Sign Up Clicked")
-                console.log(email, password, name)
-                auth.signup(email, password, name)
+              console.log('Sign Up Clicked');
+              console.log(email, password, name);
+              auth.signup(email, password, name);
             }}
           >
             Sign Up
@@ -102,7 +102,7 @@ const SignUp = ({history, auth}) => {
       </div>
     </Container>
   );
-}
+};
 
 
-export default SignUp
+export default SignUp;
