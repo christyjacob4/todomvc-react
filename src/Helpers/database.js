@@ -10,4 +10,9 @@ class db {
   updateTodo() {
 
   }
+
+
+  deleteTodo() {
+
+  }
 }
