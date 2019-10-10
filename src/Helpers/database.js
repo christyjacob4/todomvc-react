@@ -6,4 +6,8 @@ class db {
   addTodo() {
 
   }
+
+  updateTodo() {
+
+  }
 }
