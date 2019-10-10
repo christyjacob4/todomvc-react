@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignUp(props) {
+const SignUp = ({history, auth}) => {
   const classes = useStyles();
 
   const [email, setEmail] = useState('');
@@ -85,7 +85,10 @@ export default function SignUp(props) {
             className={classes.submit}
             onClick = {()=>{
                 console.log(email, password, name)
-                props.auth.signup(email, password, name)
+                console.log(auth)
+                auth.signup(email, password, name).then((val)=>{
+                  console.log("Val ", val)
+                }).catch((err)=> {console.log("ERROR Caught, ", err)})
             }}
           >
             Sign Up
@@ -102,3 +105,6 @@ export default function SignUp(props) {
     </Container>
   );
 }
+
+
+export default SignUp

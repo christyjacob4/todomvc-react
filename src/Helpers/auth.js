@@ -15,21 +15,23 @@ class Auth {
     );
   }
 
-  signup(name, email, password) {
-    let promise = sdk.auth.register(
+  signup(email, password, name) {
+    let promise = this.sdk.auth.register(
       email,
       password,
-      "http://localhost:3000?success=1",
+      "http://localhost:3000/success",
       "http://localhost:3000/",
-      "http://localhost:3000?failure=1"
+      "http://localhost:3000/failure"
     );
 
-    promise.then(
+    return promise.then(
       function(response) {
         console.log(response)
+        return response;
       },
       function(error) {
         console.log(error);
+        return error;
       }
     );
   }
