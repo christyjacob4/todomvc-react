@@ -70,7 +70,7 @@ const SignIn = ({auth}) => {
             onClick={() => {
               console.log("Sign In Clicked");
               console.log(email, password)
-              auth.signIn()
+              auth.login(email, password)
             }}
             className={classes.submit}
           >

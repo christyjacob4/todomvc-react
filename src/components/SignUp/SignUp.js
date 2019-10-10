@@ -84,11 +84,9 @@ const SignUp = ({history, auth}) => {
             color="primary"
             className={classes.submit}
             onClick = {()=>{
+              console.log("Sign Up Clicked")
                 console.log(email, password, name)
-                console.log(auth)
-                auth.signup(email, password, name).then((val)=>{
-                  console.log("Val ", val)
-                }).catch((err)=> {console.log("ERROR Caught, ", err)})
+                auth.signup(email, password, name)
             }}
           >
             Sign Up

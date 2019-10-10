@@ -1,12 +1,22 @@
 import React from 'react';
+import {useEffect} from 'react'
 
 
+const Failure = ({auth, history,location}) => {
+    console.log("IN FAILURE")
+    console.log(auth, history)
 
-const Failure = (props) => {
-    console.log(props)
-    console.log("Hi")
+    useEffect(()=>{
+        auth.checkAuthenticated()
+      .then((val)=>{
+          auth.setAuthenticated(val)
+          history.push('/signup')
+      })
+    } ,[])
+
+
     return (
-        <div> Error {props.location.search} </div>
+        <div> Error {location.search} </div>
     )
 }
 

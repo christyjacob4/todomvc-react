@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import TodoTextInput from '../TodoTextInput/TodoTextInput'
 import Button from '@material-ui/core/Button';
-import auth from '../../Helpers/auth'
 
 const Header = ({addTodo, props}) => {
 
@@ -22,8 +21,10 @@ const Header = ({addTodo, props}) => {
             variant="contained"
             color="primary"
             onClick={() => {
-              auth.logout();
-              props.history.push('/')
+              console.log("HEADER", props)
+              props.auth.logout(()=>{
+                props.history.push('/signin')
+              });
             }}
           >
             Logout

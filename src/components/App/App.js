@@ -14,13 +14,23 @@ const initialState = [
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       todos: initialState,
       gameID: null,
-      player: 0
+      player: 0,
+      isAuth: true
     };
+    console.log("APP PROP", this.props)
+    console.log(this.state);
   }
+
+//   componentDidMount() {
+//       this.props.auth.checkAuthenticated().then((res) => {
+//           this.setState({isAuth : res})
+//             console.log("Authenticated " , res)
+//           }
+//     )}
+
 
   addTodo = text => {
     //  TODO  Add functionality to add to appwrite database
@@ -83,27 +93,22 @@ class App extends Component {
     clearCompleted: this.clearCompleted
   };
 
-  componentDidMount() {
-    this.props.auth.isAuthenticated()
-      .then(res => this.setState({isAuth : res}))
-  }
 
   render() {
-
-    if(this.state.isAuth){
+    
+    const { isAuth } = this.state
+    if (isAuth === true) {
       console.log("Authenticated");
       return (
-          <div>
-            <Header addTodo={this.actions.addTodo} props={this.props} />
-            <MainSection todos={this.state.todos} actions={this.actions} />
-          </div>
-        );
-    }else{
-       console.log("Not Authenticated");
-       return <Redirect to="/signin" />;
+        <div>
+          <Header addTodo={this.actions.addTodo} props={this.props} />
+          <MainSection todos={this.state.todos} actions={this.actions} />
+        </div>
+      );
+    } else {
+      console.log("Not Authenticated");
+      return <Redirect to="/signin" />;
     }
-
-
   }
 }
 

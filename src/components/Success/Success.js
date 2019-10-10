@@ -1,11 +1,17 @@
 import React from 'react'
+import {useEffect} from 'react';
 
 
-const Success = ({history}) => {
+const Success = ({history, auth}) => {
 
-    // setInterval(()=>{
-    //     history.push('/');
-    // }, 2000)
+    useEffect(()=>{
+        auth.checkAuthenticated()
+      .then((val)=>{
+          auth.setAuthenticated(val)
+          history.push('/')
+      })
+    } ,[])
+
     return (
         <div> Success </div>
     )
