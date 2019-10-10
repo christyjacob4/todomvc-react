@@ -15,4 +15,8 @@ class db {
   deleteTodo() {
 
   }
+
+  completeTodo() {
+
+  }
 }
