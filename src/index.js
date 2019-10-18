@@ -7,6 +7,7 @@ import Failure from './components/Failure/Failure';
 import Success from './components/Success/Success';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Auth from './Helpers/auth';
+import DB from './Helpers/database';
 import 'todomvc-app-css/index.css';
 import {config} from './Helpers/config';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -20,6 +21,8 @@ appwrite
 
 
 const auth = new Auth(appwrite);
+const db = new DB(appwrite);
+db.createCollection('test_task', config.apiKey );
 
 const routing = (
   <BrowserRouter>
