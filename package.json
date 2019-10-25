@@ -13,7 +13,6 @@
     "@material-ui/icons": "^4.4.3",
     "appwrite": "^1.0.23",
     "classnames": "^2.2.5",
-    "js-cookie": "^2.2.1",
     "node-appwrite": "^1.0.27",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
