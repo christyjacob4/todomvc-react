@@ -70,7 +70,7 @@ import Footer from '../Footer/Footer'
          {this.renderToggleAll(completedCount)}
          <ul className="todo-list">
            {filteredTodos.map(todo =>
-             <TodoItem key={todo.id} todo={todo} {...actions} />
+             <TodoItem key={todo['$uid']} todo={todo} {...actions} />
            )}
          </ul>
          {this.renderFooter(completedCount)}

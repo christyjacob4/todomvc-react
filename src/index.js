@@ -21,12 +21,11 @@ appwrite
 
 
 const auth = new Auth(appwrite);
-const db = new DB(appwrite);
-db.createCollection('test_task', config.apiKey );
+const db = new DB(appwrite, config.collectionId);
 
 const routing = (
   <BrowserRouter>
-    <PrivateRoute exact path="/" component={App} auth={auth} />
+    <PrivateRoute exact path="/" component={App} auth={auth} db={db} />
     <Route exact path="/signin" render={(props) => <SignIn {...props} auth = {auth} />} />
     <Route exact path="/signup" render={(props) => <SignUp {...props} auth = {auth} />} />
     <Route exact path="/failure" render ={(props)=> <Failure {...props} auth = {auth} />} />

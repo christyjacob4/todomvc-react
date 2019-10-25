@@ -2,14 +2,9 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Header from "../Header/Header";
 import MainSection from "../MainSection/MainSection";
+import { config } from "../../Helpers/config";
 
-const initialState = [
-  {
-    text: "React ES6 TodoMVC",
-    completed: false,
-    id: 0
-  }
-];
+const initialState = [];
 
 class App extends Component {
   constructor(props) {
@@ -17,49 +12,82 @@ class App extends Component {
     this.state = {
       todos: initialState,
       gameID: null,
-      player: 0,
-      isAuth: true
+      player: 0
     };
+    // this.props.db.createCollection('tasks_3', config.apiKey );
     console.log("APP PROP", this.props);
     console.log(this.state);
   }
 
-  //   componentDidMount() {
-  //       this.props.auth.checkAuthenticated().then((res) => {
-  //           this.setState({isAuth : res})
-  //             console.log("Authenticated " , res)
-  //           }
-  //     )}
+  // Get Todos
+  componentDidMount() {
+    console.log("[INFO] IN COMPONENT DID MOUNT");
+    this.props.db
+      .getTodos()
+      .then(response => {
+        const todos = response.documents;
+        console.log(todos);
+        this.setState({ todos });
+      })
+      .catch(err => {
+        console.log("[INFO] Error", err);
+      });
+  }
 
+  // Add New todos
   addTodo = text => {
-    //  TODO  Add functionality to add to appwrite database
-    const todos = [
-      {
-        id:
-          this.state.todos.reduce(
-            (maxId, todo) => Math.max(todo.id, maxId),
-            -1
-          ) + 1,
-        completed: false,
-        text: text
-      },
-      ...this.state.todos
-    ];
-    this.setState({ todos });
+    var data = {
+      completed: false,
+      text: text
+    };
+
+    console.log("[INFO] IN ADD TODO", data);
+
+    this.props.db
+      .addTodo(data)
+      .then(response => {
+        console.log(response);
+        const todos = [data, ...this.state.todos];
+        this.setState({ todos });
+      })
+      .catch(err => {
+        console.log("[ERROR] ", err);
+      });
   };
 
+  // Delete Todo
   deleteTodo = id => {
-    // TODO remove todo from db
-    const todos = this.state.todos.filter(todo => todo.id !== id);
-    this.setState({ todos });
+    this.props.db
+      .deleteTodo(id)
+      .then(response => {
+        console.log("[INFO] response", response);
+        const todos = this.state.todos.filter(todo => todo["$uid"] !== id);
+        this.setState({ todos });
+      })
+      .catch(err => {
+        console.log("[ERROR] ", err);
+      });
   };
 
+  // Edit Todo
   editTodo = (id, text) => {
-    // Update todo to DB
-    const todos = this.state.todos.map(todo =>
-      todo.id === id ? { ...todo, text } : todo
-    );
-    this.setState({ todos });
+    console.log(id, text);
+    const data = {
+      text: text
+    };
+
+    this.props.db
+      .updateTodo(id, data)
+      .then(response => {
+        console.log("[INFO] response", response);
+        const todos = this.state.todos.map(todo =>
+          todo["$uid"] === id ? response : todo
+        );
+        this.setState({ todos });
+      })
+      .catch(err => {
+        console.log("[ERROR] ", err);
+      });
   };
 
   completeTodo = id => {
@@ -89,17 +117,18 @@ class App extends Component {
     editTodo: this.editTodo,
     completeTodo: this.completeTodo,
     completeAll: this.completeAll,
-    clearCompleted: this.clearCompleted
+    clearCompleted: this.clearCompleted,
+    getTodo: this.getTodo
   };
 
   render() {
-      console.log("Authenticated");
-      return (
-        <div>
-          <Header addTodo={this.actions.addTodo} props={this.props} />
-          <MainSection todos={this.state.todos} actions={this.actions} />
-        </div>
-      );
+    console.log("Authenticated");
+    return (
+      <div>
+        <Header addTodo={this.actions.addTodo} props={this.props} />
+        <MainSection todos={this.state.todos} actions={this.actions} />
+      </div>
+    );
   }
 }
 
