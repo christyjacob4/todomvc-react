@@ -2,7 +2,7 @@ import React from 'react';
 import {useEffect} from 'react';
 
 
-const Failure = ({auth, history, location}) => {
+const Failure = ({auth, history, db, location}) => {
   console.log('IN FAILURE');
   console.log(auth, history);
 
@@ -10,6 +10,7 @@ const Failure = ({auth, history, location}) => {
     auth.checkAuthenticated()
         .then((val)=>{
           auth.setAuthenticated(val);
+          db.setAuthenticated(val);
           history.push('/signup');
         });
   }, []);

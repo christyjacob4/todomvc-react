@@ -1,17 +1,25 @@
 /* eslint-disable require-jsdoc */
-let self = null;
-
 class DB {
   constructor(sdk, collectionId) {
     this.sdk = sdk;
     this.collectionId = collectionId;
-    self = this;
+    this.user = null;
+    this.read = null;
+    this.write = null;
+  }
+
+  setUser(user) {
+    this.user = user;
+    this.read = user && [user.roles[1]];
+    this.write = user && [user.roles[1]];
+  }
+
+  getUser(user) {
+    return this.user;
   }
 
   addTodo(data) {
-    const read = ['*'];
-    const write = ['*'];
-    const promise = this.sdk.database.createDocument(this.collectionId, data, read, write);
+    const promise = this.sdk.database.createDocument(this.collectionId, data, this.read, this.write);
     console.log('[INFO] Adding Todo');
     return promise.then(function(response) {
       return response;
@@ -21,9 +29,7 @@ class DB {
   }
 
   updateTodo(documentId, data) {
-    const read = ['*'];
-    const write = ['*'];
-    const promise = this.sdk.database.updateDocument(this.collectionId, documentId, data, read, write);
+    const promise = this.sdk.database.updateDocument(this.collectionId, documentId, data, this.read, this.write);
     console.log('[INFO] Updating Todo');
     return promise.then(function(response) {
       return response;

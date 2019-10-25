@@ -46,8 +46,7 @@ class App extends Component {
     this.props.db
       .addTodo(data)
       .then(response => {
-        console.log(response);
-        const todos = [data, ...this.state.todos];
+        const todos = [response, ...this.state.todos];
         this.setState({ todos });
       })
       .catch(err => {
@@ -90,12 +89,25 @@ class App extends Component {
       });
   };
 
-  completeTodo = id => {
-    // Mark todo as completed
-    const todos = this.state.todos.map(todo =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    );
-    this.setState({ todos });
+  completeTodo = (id, completed) => {
+
+    console.log(id);
+    const data = {
+      completed: !completed
+    };
+
+    this.props.db
+      .updateTodo(id, data)
+      .then(response => {
+        console.log("[INFO] response", response);
+        const todos = this.state.todos.map(todo =>
+          todo["$uid"] === id ? response : todo
+        );
+        this.setState({ todos });
+      })
+      .catch(err => {
+        console.log("[ERROR] ", err);
+      });
   };
 
   completeAll = () => {
@@ -107,6 +119,7 @@ class App extends Component {
   };
 
   clearCompleted = () => {
+    
     const todos = this.state.todos.filter(todo => todo.completed === false);
     this.setState({ todos });
   };

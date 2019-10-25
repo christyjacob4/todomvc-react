@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 class Auth {
   constructor(sdk) {
     this.sdk = sdk;
@@ -26,14 +27,14 @@ class Auth {
   }
 
   logout(callback) {
-    this.sdk.auth.logout().then(
+    return this.sdk.auth.logout().then(
         function(response) {
           localStorage.removeItem('auth_token');
-          console.log('AUTH', response);
-          callback();
+          return response;
         },
         function(error) {
           console.log('AUTH', error);
+          return error;
         }
     );
   }
@@ -43,11 +44,11 @@ class Auth {
     return promise.then(
         function(response) {
           localStorage.setItem('auth_token', 1);
-          return true;
+          return response;
         },
         function(error) {
           localStorage.removeItem('auth_token');
-          return false;
+          return null;
         }
     );
   }

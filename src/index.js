@@ -28,8 +28,8 @@ const routing = (
     <PrivateRoute exact path="/" component={App} auth={auth} db={db} />
     <Route exact path="/signin" render={(props) => <SignIn {...props} auth = {auth} />} />
     <Route exact path="/signup" render={(props) => <SignUp {...props} auth = {auth} />} />
-    <Route exact path="/failure" render ={(props)=> <Failure {...props} auth = {auth} />} />
-    <Route exact path="/success" render ={(props)=> <Success {...props} auth = {auth} />} />
+    <Route exact path="/failure" render ={(props)=> <Failure {...props} auth = {auth} db = {db} />} />
+    <Route exact path="/success" render ={(props)=> <Success {...props} auth = {auth} db = {db}/>} />
   </BrowserRouter>
 );
 

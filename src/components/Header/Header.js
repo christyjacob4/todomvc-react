@@ -21,8 +21,11 @@ const Header = ({addTodo, props}) => {
           color="primary"
           onClick={() => {
             console.log('HEADER', props);
-            props.auth.logout(()=>{
+            props.auth.logout().then((res)=>{
+              props.db.setUser(null);
               props.history.push('/signin');
+            }).catch((err)=>{
+              console.log('[ERR] AN Error Occured', err);
             });
           }}
         >
